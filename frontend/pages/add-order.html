@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Add Orders | SweetBite</title><link rel="stylesheet" href="../assets/css/main.css"></head>
+<body data-page="add-order">
+<div id="sidebar"></div><div class="app-shell"><div id="topbar"></div><main class="page-content">
+  <div class="page-header"><h1 class="page-title">Add Orders</h1><button class="icon-btn" aria-label="Add">+</button></div>
+  <section class="card add-order-card">
+    <form id="orderForm" novalidate>
+      <div class="order-layout">
+        <div class="order-column">
+          <div class="form-group customer-search-wrap"><label for="customerSearch">Customer Name</label><div class="input-icon"><span id="customerSearchIcon"></span><input class="form-control" id="customerSearch" placeholder="Search customer name......." autocomplete="off"><input type="hidden" id="customerId"></div><div class="suggestion-list" id="customerSuggestions"></div></div>
+          <div class="form-group"><label for="category">Category</label><select class="form-control" id="category"><option value="">Input text</option><option>Candy</option><option>Gum</option><option>Chocolate</option><option>Lollipop</option></select></div>
+          <div class="form-group"><label for="labelText">Label text</label><select class="form-control" id="labelText"><option value="">Input text</option><option>Sweet snack</option><option>Bubble gum</option><option>Chocolate</option></select></div>
+          <div class="form-group"><label for="orderDate">Order Date</label><input class="form-control" id="orderDate" type="date" required></div>
+          <div class="form-group"><label for="unitPrice">Unit Price</label><input class="form-control" id="unitPrice" readonly placeholder="$ 2"></div>
+          <div class="form-group"><label for="paymentMethod">Payment Method</label><select class="form-control" id="paymentMethod"><option>EVC</option><option>eDahab</option><option>Cash</option><option>Bank Transfer</option></select></div>
+        </div>
+        <div class="order-column">
+          <div class="form-group"><label>Item Name</label><div class="product-select-view"><img id="selectedProductImage" src="../assets/images/products/chocolate.png" alt="Selected product"><span id="selectedProductName">Chocolate</span><span class="chev" id="productChev"></span><select id="productSelect" aria-label="Select product"></select></div></div>
+          <div class="form-group"><label for="quantity">Quantity</label><input class="form-control" id="quantity" type="number" min="1" placeholder="Input text" required></div>
+          <div class="form-group"><label for="totalPrice">Total Price</label><input class="form-control" id="totalPrice" readonly placeholder="$ 2"></div>
+          <div class="form-group"><label for="orderStatus">Order status</label><select class="form-control" id="orderStatus"><option value="processing">Processing</option><option value="completed">Completed</option><option value="on_hold">On Hold</option><option value="in_transit">In Transit</option></select></div>
+          <div class="form-group"><label for="notes">Notes</label><textarea class="form-control" id="notes" placeholder="Input text"></textarea></div>
+        </div>
+        <aside class="order-summary">
+          <h3>Order Summary</h3>
+          <div class="summary-product"><img id="summaryImage" src="../assets/images/products/chocolate.png" alt="Product"><div class="meta"><strong id="summaryName">Chocolate</strong><small id="summaryQty">Qty:0</small></div><strong id="summaryLinePrice">$0</strong></div>
+          <div class="summary-row"><span>Subtotal</span><strong id="summarySubtotal">$0</strong></div>
+          <div class="summary-row discount"><span>Discount</span><strong id="summaryDiscount">$0</strong></div>
+          <hr class="summary-divider">
+          <div class="summary-row total"><span>Total</span><strong id="summaryTotal">$0</strong></div>
+          <button type="button" class="btn btn-purple processing-btn" id="processingLabel">Processing</button>
+        </aside>
+      </div>
+      <div class="form-actions"><button type="button" class="btn btn-yellow" id="cancelOrder">Cancel</button><button type="reset" class="btn btn-outline">Reset</button><button type="submit" class="btn btn-primary">Save</button></div>
+    </form>
+  </section>
+</main></div>
+<script src="../assets/js/config.js"></script><script src="../assets/js/icons.js"></script><script src="../assets/js/api.js"></script><script src="../assets/js/common.js"></script><script src="../assets/js/validation.js"></script><script>SB.protect()</script><script src="../assets/js/layout.js"></script><script src="../assets/js/pages/add-order.js"></script>
+</body></html>

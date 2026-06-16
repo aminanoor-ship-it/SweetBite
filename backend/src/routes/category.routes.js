@@ -1,0 +1,10 @@
+const router = require('express').Router();
+const { body } = require('express-validator');
+const controller = require('../controllers/category.controller');
+const asyncHandler = require('../utils/asyncHandler');
+const { protect } = require('../middleware/auth.middleware');
+const { allowRoles } = require('../middleware/role.middleware');
+const { validate } = require('../middleware/validate.middleware');
+router.get('/', protect, asyncHandler(controller.list));
+router.post('/', protect, allowRoles('Admin'), body('name').trim().isLength({ min: 2, max: 100 }).withMessage('Category name is required.'), validate, asyncHandler(controller.create));
+module.exports = router;

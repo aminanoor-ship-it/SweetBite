@@ -1,0 +1,14 @@
+const router = require('express').Router();
+const controller = require('../controllers/report.controller');
+const asyncHandler = require('../utils/asyncHandler');
+const { protect } = require('../middleware/auth.middleware');
+const { allowRoles } = require('../middleware/role.middleware');
+router.use(protect, allowRoles('Admin'));
+router.get('/sales', asyncHandler(controller.sales));
+router.get('/products', asyncHandler(controller.products));
+router.get('/customers', asyncHandler(controller.customers));
+router.get('/stock', asyncHandler(controller.stock));
+router.get('/profit-loss/summary', asyncHandler(controller.profitLossSummary));
+router.get('/profit-loss/products', asyncHandler(controller.profitLossProducts));
+router.get('/profit-loss/monthly', asyncHandler(controller.profitLossMonthly));
+module.exports = router;

@@ -1,0 +1,119 @@
+SweetBite-Full-System/
+├── backend/
+│   ├── scripts/
+│   │   ├── checkSyntax.js
+│   │   └── createAdmin.js
+│   ├── src/
+│   │   ├── config/
+│   │   │   └── db.js
+│   │   ├── controllers/
+│   │   │   ├── auth.controller.js
+│   │   │   ├── category.controller.js
+│   │   │   ├── customer.controller.js
+│   │   │   ├── dashboard.controller.js
+│   │   │   ├── order.controller.js
+│   │   │   ├── product.controller.js
+│   │   │   ├── report.controller.js
+│   │   │   ├── sales.controller.js
+│   │   │   ├── settings.controller.js
+│   │   │   ├── team.controller.js
+│   │   │   └── user.controller.js
+│   │   ├── middleware/
+│   │   │   ├── auth.middleware.js
+│   │   │   ├── error.middleware.js
+│   │   │   ├── role.middleware.js
+│   │   │   ├── upload.middleware.js
+│   │   │   └── validate.middleware.js
+│   │   ├── models/
+│   │   │   ├── customer.model.js
+│   │   │   ├── order.model.js
+│   │   │   ├── product.model.js
+│   │   │   ├── settings.model.js
+│   │   │   ├── team.model.js
+│   │   │   └── user.model.js
+│   │   ├── routes/
+│   │   │   ├── auth.routes.js
+│   │   │   ├── category.routes.js
+│   │   │   ├── customer.routes.js
+│   │   │   ├── dashboard.routes.js
+│   │   │   ├── index.js
+│   │   │   ├── order.routes.js
+│   │   │   ├── product.routes.js
+│   │   │   ├── report.routes.js
+│   │   │   ├── sales.routes.js
+│   │   │   ├── settings.routes.js
+│   │   │   ├── team.routes.js
+│   │   │   └── user.routes.js
+│   │   ├── utils/
+│   │   │   ├── asyncHandler.js
+│   │   │   ├── files.js
+│   │   │   ├── orderPresenter.js
+│   │   │   └── token.js
+│   │   ├── validators/
+│   │   │   ├── auth.validator.js
+│   │   │   ├── customer.validator.js
+│   │   │   ├── order.validator.js
+│   │   │   └── product.validator.js
+│   │   └── app.js
+│   ├── uploads/
+│   │   ├── products/
+│   │   │   ├── .gitkeep
+│   │   │   ├── candy.png
+│   │   │   ├── chocolate.png
+│   │   │   ├── gum.png
+│   │   │   └── lollipop.png
+│   │   ├── profiles/
+│   │   │   ├── .gitkeep
+│   │   │   └── kawther.png
+│   │   └── team/
+│   │       ├── .gitkeep
+│   │       ├── abdigani.png
+│   │       ├── amina.png
+│   │       ├── ismacil.png
+│   │       ├── kawther.png
+│   │       └── malyun.png
+│   ├── .env.example
+│   ├── package.json
+│   ├── README.md
+│   └── server.js
+├── database/
+│   ├── backup/
+│   │   └── README.md
+│   ├── create_database_user.sql.example
+│   ├── schema.sql
+│   └── seed.sql
+├── docs/
+│   └── SweetBite_System_Plan.md
+├── frontend/
+│   ├── assets/
+│   │   ├── css/
+│   │   │   ├── auth.css
+│   │   │   └── main.css
+│   │   ├── images/
+│   │   │   ├── products/
+│   │   │   ├── profile/
+│   │   │   └── team/
+│   │   └── js/
+│   │       ├── pages/
+│   │       ├── api.js
+│   │       ├── common.js
+│   │       ├── config.js
+│   │       ├── icons.js
+│   │       ├── layout.js
+│   │       └── validation.js
+│   ├── pages/
+│   │   ├── about.html
+│   │   ├── add-order.html
+│   │   ├── contact.html
+│   │   ├── customers.html
+│   │   ├── dashboard.html
+│   │   ├── login.html
+│   │   ├── orders.html
+│   │   ├── products.html
+│   │   ├── register.html
+│   │   ├── sales.html
+│   │   └── settings.html
+│   ├── index.html
+│   └── README.md
+├── .gitignore
+└── README.md

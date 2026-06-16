@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Create Account | SweetBite</title>
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
+</head>
+<body class="auth-page">
+  <div class="auth-bg" aria-hidden="true"><span class="auth-blob one"></span><span class="auth-blob two"></span><span class="auth-blob three"></span><span class="auth-blob four"></span></div>
+  <main class="auth-wrap">
+    <section class="auth-card register">
+      <h1>Create an Account</h1>
+      <p class="intro">Create an account to continue</p>
+      <form id="registerForm" class="auth-form" novalidate>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input class="form-control" id="fullName" name="fullName" type="text" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email address:</label>
+          <input class="form-control" id="email" name="email" type="email" placeholder="esteban_schiller@gmail.com" required>
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input class="form-control" id="username" name="username" type="text" placeholder="Username" required minlength="3">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-field">
+            <input class="form-control" id="password" name="password" type="password" placeholder="••••••" required minlength="8">
+            <button type="button" class="toggle-password" data-target="password" aria-label="Toggle password visibility">
+              <svg class="eye-icon eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="eye-icon eye-closed" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.06 3.29"/><line x1="1" y1="1" x2="23" y2="23"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="form-group profile-image-group">
+          <label>Profile Image</label>
+          <div class="profile-upload" id="profileUpload" role="button" tabindex="0" aria-label="Upload profile image">
+            <img id="profilePreview" src="" alt="">
+            <div class="upload-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5M12 3v12"/></svg><span>Upload</span></div>
+            <input type="file" id="profileImage" name="profileImage" accept="image/png,image/jpeg,image/webp" hidden>
+          </div>
+        </div>
+        <label class="check-row"><input id="terms" type="checkbox"> I accept terms and conditions</label>
+        <div id="authError" class="auth-error"></div>
+        <button class="btn btn-beige auth-submit" type="submit">Sign Up</button>
+      </form>
+      <p class="auth-footer">Already have an account? <a href="login.html">Login</a></p>
+    </section>
+  </main>
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/validation.js"></script>
+  <script src="../assets/js/pages/auth.js"></script>
+</body>
+</html>

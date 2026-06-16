@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Products | SweetBite</title><link rel="stylesheet" href="../assets/css/main.css"></head>
+<body data-page="products">
+<div id="sidebar"></div><div class="app-shell"><div id="topbar"></div><main class="page-content">
+  <div class="page-header"><h1 class="page-title">Products</h1><div class="header-actions"><button class="btn btn-primary" id="addProductBtn">+ Product</button><select class="form-control compact-select" id="categoryFilter"><option value="all">All</option><option>Candy</option><option>Gum</option><option>Chocolate</option><option>Lollipop</option></select><select class="form-control compact-select" id="statusFilter"><option value="">All Status</option><option value="available">Available</option><option value="out_of_stock">Run out</option></select></div></div>
+  <section class="products-grid" id="productsGrid"></section>
+</main></div>
+<div class="modal-overlay" id="productModal"><div class="modal"><div class="modal-head"><h2 id="productModalTitle">New Product</h2><button class="icon-btn" data-close-modal="productModal">×</button></div>
+<form id="productForm" class="modal-form" novalidate><input type="hidden" id="productId">
+<div class="form-group"><label>Product Name</label><input class="form-control" id="productName" required></div>
+<div class="form-group"><label>Category</label><select class="form-control" id="productCategory" required><option value="">Select category</option><option>Candy</option><option>Gum</option><option>Chocolate</option><option>Lollipop</option></select></div>
+<div class="form-group"><label>SKU</label><input class="form-control" id="productSku" required></div>
+<div class="form-group"><label>Price</label><input class="form-control" id="productPrice" type="number" min="0.01" step="0.01" required></div>
+<div class="form-group"><label>Stock Quantity</label><input class="form-control" id="productStock" type="number" min="0" required></div>
+<div class="form-group"><label>Image</label><div class="image-upload" id="imageUploadArea"><img id="imagePreview" src="" alt=""><div class="image-upload-placeholder" id="imagePlaceholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5M12 3v12"/></svg><span>Click to upload</span><small>JPG, PNG or WebP (max 2MB)</small></div><input type="file" id="productImage" accept="image/png,image/jpeg,image/webp" hidden></div></div>
+<div class="form-group"><label>Description</label><textarea class="form-control" id="productDescription"></textarea></div>
+<div class="modal-actions"><button type="button" class="btn btn-light" data-close-modal="productModal">Cancel</button><button type="button" class="btn btn-danger" id="deleteProductBtn" style="display:none">Delete</button><button type="submit" class="btn btn-primary">Save</button></div></form></div></div>
+<div class="modal-overlay" id="viewProductModal"><div class="modal"><div class="modal-head"><h2>Product Details</h2><button class="icon-btn" data-close-modal="viewProductModal">×</button></div><div id="productDetails"></div></div></div>
+<div class="modal-overlay" id="confirmModal"><div class="modal confirm-modal"><div class="confirm-icon" id="confirmIcon"></div><h2 id="confirmTitle"></h2><p id="confirmMessage"></p><div class="modal-actions"><button class="btn btn-light" id="confirmCancel">Cancel</button><button class="btn btn-danger" id="confirmOk">Delete</button></div></div></div>
+<script src="../assets/js/config.js"></script><script src="../assets/js/icons.js"></script><script src="../assets/js/api.js"></script><script src="../assets/js/common.js"></script><script src="../assets/js/validation.js"></script><script>SB.protect()</script><script src="../assets/js/layout.js"></script><script src="../assets/js/pages/products.js"></script>
+</body></html>

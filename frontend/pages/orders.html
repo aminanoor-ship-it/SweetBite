@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Order Lists | SweetBite</title><link rel="stylesheet" href="../assets/css/main.css"></head>
+<body data-page="orders">
+<div id="sidebar"></div><div class="app-shell"><div id="topbar"></div><main class="page-content">
+  <div class="page-header"><h1 class="page-title">Order Lists</h1></div>
+  <div class="filter-bar">
+    <input class="filter-control" id="dateFilter" type="date" aria-label="Date filter">
+    <select class="filter-control" id="statusFilter"><option value="all">Order Status</option><option value="completed">Completed</option><option value="processing">Processing</option><option value="rejected">Rejected</option><option value="on_hold">On Hold</option><option value="in_transit">In Transit</option></select>
+    <button class="filter-reset" id="resetFilter">Reset Filter</button>
+  </div>
+  <section class="card orders-card"><div class="table-wrap"><table class="data-table"><thead><tr><th>ID</th><th>NAME</th><th>ADDRESS</th><th>DATE</th><th>Items</th><th>STATUS</th></tr></thead><tbody id="ordersBody"></tbody></table></div></section>
+</main></div>
+<div class="modal-overlay" id="orderModal"><div class="modal"><div class="modal-head"><h2>Order Details</h2><button class="icon-btn" data-close-modal="orderModal">×</button></div><div id="orderDetails"></div></div></div>
+<script src="../assets/js/config.js"></script><script src="../assets/js/icons.js"></script><script src="../assets/js/api.js"></script><script src="../assets/js/common.js"></script><script>SB.protect()</script><script src="../assets/js/layout.js"></script><script src="../assets/js/pages/orders.js"></script>
+</body></html>

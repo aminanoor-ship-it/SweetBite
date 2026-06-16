@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sales | SweetBite</title><link rel="stylesheet" href="../assets/css/main.css"></head>
+<body data-page="sales">
+<div id="sidebar"></div><div class="app-shell"><div id="topbar"></div><main class="page-content">
+  <div class="page-header"><h1 class="page-title">Sales</h1></div>
+  <section class="stat-grid" id="salesStats"></section>
+  <section class="sales-grid">
+    <article class="card sales-chart-card"><div class="card-head"><h2>Sales Overview</h2><select class="form-control compact-select" id="salesPeriod"><option>This month</option><option>Last month</option></select></div><canvas id="salesChart"></canvas></article>
+    <article class="card top-products"><h2>Top Products</h2><div id="topProducts"></div></article>
+  </section>
+  <section class="recent-sales"><h2>Recent Sales</h2><div class="card"><div class="table-wrap"><table class="data-table"><thead><tr><th>Customer Name</th><th>Product</th><th>Payment</th><th>DATE</th><th>Amount</th><th>STATUS</th></tr></thead><tbody id="recentSalesBody"></tbody></table></div></div></section>
+</main></div>
+<script src="../assets/js/config.js"></script><script src="../assets/js/icons.js"></script><script src="../assets/js/api.js"></script><script src="../assets/js/common.js"></script><script>SB.protect()</script><script src="../assets/js/layout.js"></script><script src="../assets/js/pages/sales.js"></script>
+</body></html>

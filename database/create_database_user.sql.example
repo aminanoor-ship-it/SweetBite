@@ -1,0 +1,6 @@
+-- Run this as a MySQL administrator and change the password first.
+-- The application user only needs DML permissions (SELECT, INSERT, UPDATE, DELETE).
+-- Schema changes (CREATE, ALTER, DROP) should be run by a separate admin account.
+CREATE USER IF NOT EXISTS 'sweetbite_user'@'localhost' IDENTIFIED BY 'change_this_password';
+GRANT SELECT, INSERT, UPDATE, DELETE ON sweetbite_db.* TO 'sweetbite_user'@'localhost';
+FLUSH PRIVILEGES;
