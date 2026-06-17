@@ -7,7 +7,7 @@ async function summary(req, res) {
     SELECT
       COALESCE(SUM(CASE WHEN order_status IN ('completed','delivered') THEN total_amount ELSE 0 END),0) AS revenue,
       COUNT(*) AS orders,
-      (SELECT COALESCE(SUM(quantity),0) FROM order_items) AS sold,
+      (SELECT COALESCE(SUM(oi.quantity),0) FROM order_items oi JOIN orders o ON o.order_id = oi.order_id WHERE o.order_status IN ('completed','delivered')) AS sold,
       SUM(order_status = 'processing') AS pending
     FROM orders`);
   const [topRows] = await pool.query(`

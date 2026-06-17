@@ -3,6 +3,9 @@ const OrderModel = require('../models/order.model');
 
 async function getDashboard(req, res) {
   const month = req.query.month;
+  if (month && !/^\d{4}-\d{2}$/.test(month)) {
+    return res.status(400).json({ success: false, message: 'Month must be in YYYY-MM format.' });
+  }
 
   let ordersWhere = '';
   let completedWhere = '';
@@ -68,16 +71,26 @@ async function getDashboard(req, res) {
     payment_method: order.payment_method,
     items: itemsMap.get(order.order_id) || []
   }));
-  const chartMonth = month || `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`;
-  const [months] = await pool.execute(`
-    SELECT DATE_FORMAT(order_date, '%b %d') AS label, COALESCE(SUM(total_amount),0) AS amount
-    FROM orders WHERE order_status IN ('completed','delivered') AND DATE_FORMAT(order_date, '%Y-%m') = ?
-    GROUP BY order_date, DATE_FORMAT(order_date, '%b %d') ORDER BY order_date LIMIT 31`, [chartMonth]);
+  let revenueQuery, revenueVals = [];
+  if (month) {
+    revenueQuery = `
+      SELECT DATE_FORMAT(order_date, '%b %d') AS label, COALESCE(SUM(total_amount),0) AS amount
+      FROM orders WHERE order_status IN ('completed','delivered') AND DATE_FORMAT(order_date, '%Y-%m') = ?
+      GROUP BY DATE_FORMAT(order_date, '%b %d'), DATE(order_date) ORDER BY DATE(order_date) LIMIT 31`;
+    revenueVals = [month];
+  } else {
+    revenueQuery = `
+      SELECT DATE_FORMAT(order_date, '%b %Y') AS label, COALESCE(SUM(total_amount),0) AS amount
+      FROM orders WHERE order_status IN ('completed','delivered')
+      GROUP BY YEAR(order_date), MONTH(order_date), DATE_FORMAT(order_date, '%b %Y')
+      ORDER BY YEAR(order_date), MONTH(order_date) LIMIT 24`;
+  }
+  const [revenueRows] = await pool.execute(revenueQuery, revenueVals);
   res.json({ success: true, data: {
     stats: { customers: Number(stats.customers), orders: Number(stats.orders), sales: Number(stats.sales), pending: Number(stats.pending) },
     deals,
-    revenue: months.map(row => Number(row.amount)),
-    revenueLabels: months.map(row => row.label)
+    revenue: revenueRows.map(row => Number(row.amount)),
+    revenueLabels: revenueRows.map(row => row.label)
   }});
 }
 module.exports = { getDashboard };

@@ -23,10 +23,12 @@ async function profitLossSummary(req, res) {
   const { where, vals } = dateFilter(req);
   const [[row]] = await pool.execute(`
     SELECT
-      COALESCE(SUM(oi.quantity * oi.unit_price), 0) AS revenue,
+      COALESCE(SUM(oi.line_total * o.total_amount / NULLIF(o.subtotal, 0)), 0) AS revenue,
       COALESCE(SUM(oi.quantity * COALESCE(p.cost_price, 0)), 0) AS cost,
-      COALESCE(SUM(CASE WHEN oi.unit_price >= COALESCE(p.cost_price,0) THEN (oi.unit_price - COALESCE(p.cost_price,0)) * oi.quantity ELSE 0 END), 0) AS profit,
-      COALESCE(SUM(CASE WHEN oi.unit_price < COALESCE(p.cost_price,0) THEN (COALESCE(p.cost_price,0) - oi.unit_price) * oi.quantity ELSE 0 END), 0) AS loss
+      COALESCE(SUM(CASE WHEN oi.unit_price * o.total_amount / NULLIF(o.subtotal, 0) >= COALESCE(p.cost_price,0)
+        THEN (oi.unit_price * o.total_amount / NULLIF(o.subtotal, 0) - COALESCE(p.cost_price,0)) * oi.quantity ELSE 0 END), 0) AS profit,
+      COALESCE(SUM(CASE WHEN oi.unit_price * o.total_amount / NULLIF(o.subtotal, 0) < COALESCE(p.cost_price,0)
+        THEN (COALESCE(p.cost_price,0) - oi.unit_price * o.total_amount / NULLIF(o.subtotal, 0)) * oi.quantity ELSE 0 END), 0) AS loss
     FROM order_items oi
     JOIN orders o ON o.order_id = oi.order_id
     JOIN products p ON p.product_id = oi.product_id
@@ -47,10 +49,12 @@ async function profitLossProducts(req, res) {
       MAX(COALESCE(p.cost_price, 0)) AS cost_price,
       MAX(oi.unit_price) AS selling_price,
       SUM(oi.quantity) AS sold_quantity,
-      SUM(oi.quantity * oi.unit_price) AS revenue,
+      SUM(oi.line_total * o.total_amount / NULLIF(o.subtotal, 0)) AS revenue,
       SUM(oi.quantity * COALESCE(p.cost_price, 0)) AS cost,
-      SUM(CASE WHEN oi.unit_price >= COALESCE(p.cost_price,0) THEN (oi.unit_price - COALESCE(p.cost_price,0)) * oi.quantity ELSE 0 END) AS profit,
-      SUM(CASE WHEN oi.unit_price < COALESCE(p.cost_price,0) THEN (COALESCE(p.cost_price,0) - oi.unit_price) * oi.quantity ELSE 0 END) AS loss
+      SUM(CASE WHEN oi.unit_price * o.total_amount / NULLIF(o.subtotal, 0) >= COALESCE(p.cost_price,0)
+        THEN (oi.unit_price * o.total_amount / NULLIF(o.subtotal, 0) - COALESCE(p.cost_price,0)) * oi.quantity ELSE 0 END) AS profit,
+      SUM(CASE WHEN oi.unit_price * o.total_amount / NULLIF(o.subtotal, 0) < COALESCE(p.cost_price,0)
+        THEN (COALESCE(p.cost_price,0) - oi.unit_price * o.total_amount / NULLIF(o.subtotal, 0)) * oi.quantity ELSE 0 END) AS loss
     FROM order_items oi
     JOIN orders o ON o.order_id = oi.order_id
     JOIN products p ON p.product_id = oi.product_id
@@ -70,10 +74,12 @@ async function profitLossMonthly(req, res) {
   const [rows] = await pool.execute(`
     SELECT
       MONTH(o.order_date) AS month,
-      COALESCE(SUM(oi.quantity * oi.unit_price), 0) AS revenue,
+      COALESCE(SUM(oi.line_total * o.total_amount / NULLIF(o.subtotal, 0)), 0) AS revenue,
       COALESCE(SUM(oi.quantity * COALESCE(p.cost_price, 0)), 0) AS cost,
-      COALESCE(SUM(CASE WHEN oi.unit_price >= COALESCE(p.cost_price,0) THEN (oi.unit_price - COALESCE(p.cost_price,0)) * oi.quantity ELSE 0 END), 0) AS profit,
-      COALESCE(SUM(CASE WHEN oi.unit_price < COALESCE(p.cost_price,0) THEN (COALESCE(p.cost_price,0) - oi.unit_price) * oi.quantity ELSE 0 END), 0) AS loss
+      COALESCE(SUM(CASE WHEN oi.unit_price * o.total_amount / NULLIF(o.subtotal, 0) >= COALESCE(p.cost_price,0)
+        THEN (oi.unit_price * o.total_amount / NULLIF(o.subtotal, 0) - COALESCE(p.cost_price,0)) * oi.quantity ELSE 0 END), 0) AS profit,
+      COALESCE(SUM(CASE WHEN oi.unit_price * o.total_amount / NULLIF(o.subtotal, 0) < COALESCE(p.cost_price,0)
+        THEN (COALESCE(p.cost_price,0) - oi.unit_price * o.total_amount / NULLIF(o.subtotal, 0)) * oi.quantity ELSE 0 END), 0) AS loss
     FROM order_items oi
     JOIN orders o ON o.order_id = oi.order_id
     JOIN products p ON p.product_id = oi.product_id

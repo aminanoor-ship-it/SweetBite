@@ -92,30 +92,35 @@
       p3.innerHTML='<strong>Price:</strong> ';
       p3.appendChild(document.createTextNode(SB.money(p.price)));
       const p4=document.createElement('p');
-      p4.innerHTML='<strong>Stock:</strong> ';
-      p4.appendChild(document.createTextNode(p.stock));
+      p4.innerHTML='<strong>Cost:</strong> ';
+      p4.appendChild(document.createTextNode(SB.money(p.cost_price||0)));
       const p5=document.createElement('p');
-      p5.textContent=p.description||'';
+      p5.innerHTML='<strong>Stock:</strong> ';
+      p5.appendChild(document.createTextNode(p.stock));
+      const p6=document.createElement('p');
+      p6.textContent=p.description||'';
       infoDiv.appendChild(h2);
       infoDiv.appendChild(p1);
       infoDiv.appendChild(p2);
       infoDiv.appendChild(p3);
       infoDiv.appendChild(p4);
       infoDiv.appendChild(p5);
+      infoDiv.appendChild(p6);
       container.appendChild(img);
       container.appendChild(infoDiv);
       productDetails.appendChild(container);
       SB.openModal('viewProductModal');
     }
-    if(edit){const p=products.find(x=>x.id==edit.dataset.id);document.getElementById('productId').value=p.id;document.getElementById('productName').value=p.name;document.getElementById('productCategory').value=p.category;document.getElementById('productSku').value=p.sku;document.getElementById('productPrice').value=p.price;document.getElementById('productStock').value=p.stock;document.getElementById('productDescription').value=p.description||'';document.getElementById('productModalTitle').textContent='Edit Product';document.getElementById('deleteProductBtn').style.display='';document.getElementById('imagePreview').src=p.image||'';SB.openModal('productModal');}
+    if(edit){const p=products.find(x=>x.id==edit.dataset.id);document.getElementById('productId').value=p.id;document.getElementById('productName').value=p.name;document.getElementById('productCategory').value=p.category;document.getElementById('productSku').value=p.sku;document.getElementById('productPrice').value=p.price;document.getElementById('productCostPrice').value=p.cost_price||'';document.getElementById('productStock').value=p.stock;document.getElementById('productDescription').value=p.description||'';document.getElementById('productModalTitle').textContent='Edit Product';document.getElementById('deleteProductBtn').style.display='';document.getElementById('imagePreview').src=p.image||'';SB.openModal('productModal');}
   });
   document.getElementById('productForm').addEventListener('submit',async e=>{
     e.preventDefault();const id=document.getElementById('productId').value;const file=document.getElementById('productImage').files[0];
     if(file&&!SBValidation.image(file)){SB.toast('Image must be JPG, PNG or WebP and smaller than 2 MB.','error');return;}
     const existing=products.find(p=>p.id==id);let image=existing?.image||'../assets/images/products/candy.png';if(file)image=await new Promise(r=>{const reader=new FileReader();reader.onload=()=>r(reader.result);reader.readAsDataURL(file);});
-    const payload={name:document.getElementById('productName').value.trim(),category:document.getElementById('productCategory').value,sku:document.getElementById('productSku').value.trim(),price:Number(document.getElementById('productPrice').value),stock:Number(document.getElementById('productStock').value),description:document.getElementById('productDescription').value.trim(),image,imageFile:file||null};
+    const costPriceRaw=document.getElementById('productCostPrice').value;
+    const payload={name:document.getElementById('productName').value.trim(),category:document.getElementById('productCategory').value,sku:document.getElementById('productSku').value.trim(),price:Number(document.getElementById('productPrice').value),costPrice:costPriceRaw===''?null:Number(costPriceRaw),stock:Number(document.getElementById('productStock').value),description:document.getElementById('productDescription').value.trim(),image,imageFile:file||null};
     SBValidation.clearAllErrors(e.currentTarget);
-    if(!SBValidation.validateForm([{field:'productName',check:SBValidation.required(payload.name),message:'Product name is required.'},{field:'productCategory',check:SBValidation.required(payload.category),message:'Category is required.'},{field:'productSku',check:SBValidation.required(payload.sku),message:'SKU is required.'},{field:'productPrice',check:SBValidation.positiveNumber(payload.price),message:'Price must be greater than zero.'},{field:'productStock',check:SBValidation.nonNegativeNumber(payload.stock),message:'Stock cannot be negative.'}]))return;
+    if(!SBValidation.validateForm([{field:'productName',check:SBValidation.required(payload.name),message:'Product name is required.'},{field:'productCategory',check:SBValidation.required(payload.category),message:'Category is required.'},{field:'productSku',check:SBValidation.required(payload.sku),message:'SKU is required.'},{field:'productPrice',check:SBValidation.positiveNumber(payload.price),message:'Price must be greater than zero.'},{field:'productCostPrice',check:payload.costPrice===null||SBValidation.nonNegativeNumber(payload.costPrice),message:'Cost price cannot be negative.'},{field:'productStock',check:SBValidation.nonNegativeNumber(payload.stock),message:'Stock cannot be negative.'}]))return;
     try{id?await SweetBiteAPI.products.update(id,payload):await SweetBiteAPI.products.create(payload);SB.closeModal('productModal');SB.toast(id?'Product updated.':'Product added.');load();}catch(err){SB.toast(err.message,'error');}
   });
   document.getElementById('deleteProductBtn').addEventListener('click',async()=>{

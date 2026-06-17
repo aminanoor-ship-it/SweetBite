@@ -108,19 +108,29 @@
     }
     const sales=rev.map(v=>v/maxVal*innerH);
     const profit=rev.map((v,i)=>v*0.45/maxVal*innerH);
+    const xStep = rev.length > 1 ? innerW / (rev.length - 1) : 0;
     function area(arr,fill){
       const pts=[];
-      for(let i=0;i<arr.length;i++){pts.push([p.l+i*(innerW/(arr.length-1)),p.t+innerH-arr[i]]);}
+      for(let i=0;i<arr.length;i++){pts.push([p.l+i*xStep,p.t+innerH-arr[i]]);}
       const grad=ctx.createLinearGradient(0,p.t,0,p.t+innerH);
       grad.addColorStop(0,fill);grad.addColorStop(1,fill.replace('0.75','0.10'));
-      ctx.beginPath();ctx.moveTo(pts[0][0],p.t+innerH);pts.forEach(pt=>ctx.lineTo(...pt));ctx.lineTo(pts[pts.length-1][0],p.t+innerH);ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+      ctx.beginPath();
+      if(pts.length===1){
+        ctx.moveTo(p.l,p.t+innerH);ctx.lineTo(p.l,pts[0][1]);ctx.lineTo(w-p.r,pts[0][1]);ctx.lineTo(w-p.r,p.t+innerH);
+      }else{
+        ctx.moveTo(pts[0][0],p.t+innerH);pts.forEach(pt=>ctx.lineTo(...pt));ctx.lineTo(pts[pts.length-1][0],p.t+innerH);
+      }
+      ctx.closePath();ctx.fillStyle=grad;ctx.fill();
     }
     area(profit,'rgba(210,143,246,0.75)');
     area(sales,'rgba(255,139,112,0.75)');
     const labels=data.revenueLabels||[];
     const step=Math.max(1,Math.floor(labels.length/10));
     ctx.fillStyle='#aaa';
-    labels.forEach((l,i)=>{if(i%step===0||i===labels.length-1)ctx.fillText(l,p.l+i*(innerW/(labels.length-1))-10,h-10);});
+    labels.forEach((l,i)=>{
+      const x = rev.length > 1 ? p.l + i * (innerW / (labels.length - 1)) - 10 : p.l + innerW / 2;
+      if(i%step===0||i===labels.length-1)ctx.fillText(l,x,h-10);
+    });
   }
 
   populateMonthSelects();

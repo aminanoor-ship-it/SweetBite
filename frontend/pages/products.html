@@ -10,7 +10,8 @@
 <div class="form-group"><label>Product Name</label><input class="form-control" id="productName" required></div>
 <div class="form-group"><label>Category</label><select class="form-control" id="productCategory" required><option value="">Select category</option><option>Candy</option><option>Gum</option><option>Chocolate</option><option>Lollipop</option></select></div>
 <div class="form-group"><label>SKU</label><input class="form-control" id="productSku" required></div>
-<div class="form-group"><label>Price</label><input class="form-control" id="productPrice" type="number" min="0.01" step="0.01" required></div>
+<div class="form-row"><div class="form-group"><label>Price</label><input class="form-control" id="productPrice" type="number" min="0.01" step="0.01" required></div>
+<div class="form-group"><label>Cost Price</label><input class="form-control" id="productCostPrice" type="number" min="0" step="0.01"></div></div>
 <div class="form-group"><label>Stock Quantity</label><input class="form-control" id="productStock" type="number" min="0" required></div>
 <div class="form-group"><label>Image</label><div class="image-upload" id="imageUploadArea"><img id="imagePreview" src="" alt=""><div class="image-upload-placeholder" id="imagePlaceholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5M12 3v12"/></svg><span>Click to upload</span><small>JPG, PNG or WebP (max 2MB)</small></div><input type="file" id="productImage" accept="image/png,image/jpeg,image/webp" hidden></div></div>
 <div class="form-group"><label>Description</label><textarea class="form-control" id="productDescription"></textarea></div>

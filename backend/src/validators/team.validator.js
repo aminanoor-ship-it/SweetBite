@@ -1,5 +1,7 @@
 const { body } = require('express-validator');
 
+const emailNormalizer = { gmail_remove_dots: false };
+
 const teamMemberRules = [
   body('full_name')
     .trim()
@@ -9,7 +11,7 @@ const teamMemberRules = [
     .trim()
     .isEmail()
     .withMessage('Enter a valid email address.')
-    .normalizeEmail(),
+    .normalizeEmail(emailNormalizer),
   body('role_title')
     .optional({ checkFalsy: true })
     .trim()

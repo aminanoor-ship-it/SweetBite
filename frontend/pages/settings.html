@@ -4,23 +4,51 @@
 <div id="sidebar"></div><div class="app-shell"><div id="topbar"></div><main class="page-content">
   <div class="page-header"><h1 class="page-title">Settings</h1></div>
   <form id="settingsForm" novalidate>
-    <section class="card settings-section">
-      <h2>Profile Setting</h2><p>Update your profile information.</p>
+    <section class="card settings-section" id="profileSection">
+      <h2>Profile</h2><p>Your account information.</p>
       <div class="profile-settings">
-        <div class="form-group"><label for="fullName">Full Name</label><input class="form-control" id="fullName" required></div>
-        <div class="form-group"><label for="profileEmail">Email Address</label><input class="form-control" id="profileEmail" type="email" required></div>
+        <div class="profile-display" id="profileDisplay">
+          <div class="profile-info-block">
+            <span class="profile-label">Full Name</span>
+            <span class="profile-value" id="displayFullName"></span>
+          </div>
+          <div class="profile-info-block">
+            <span class="profile-label">Email Address</span>
+            <span class="profile-value" id="displayEmail"></span>
+          </div>
+          <button class="btn btn-beige" type="button" id="editProfileBtn">Edit Profile</button>
+        </div>
+        <div class="profile-edit" id="profileEdit">
+          <div class="form-group"><label for="fullName">Full Name</label><input class="form-control" id="fullName" required></div>
+          <div class="form-group"><label for="profileEmail">Email Address</label><input class="form-control" id="profileEmail" type="email" required></div>
+          <div class="profile-edit-actions">
+            <button class="btn btn-light" type="button" id="cancelProfileEdit">Cancel</button>
+            <button class="btn btn-primary" type="button" id="saveProfileBtn">Save Profile</button>
+          </div>
+        </div>
         <div class="profile-image-area"><img id="profilePreview" src="../assets/images/profile/kawther.png" alt="Profile"><input id="profileImage" type="file" accept="image/png,image/jpeg,image/webp" hidden><button class="change-image" type="button" id="changeImageBtn">change image <span id="uploadIcon"></span></button></div>
       </div>
     </section>
-    <section class="card settings-section">
-      <h2>Password</h2><p>Change your password.</p>
-      <div class="password-grid">
-        <div class="form-group"><label for="currentPassword">Current password</label><input class="form-control" id="currentPassword" type="password" placeholder="Enter current password.."></div>
-        <div class="form-group"><label for="newPassword">New password</label><input class="form-control" id="newPassword" type="password" placeholder="Enter new password..."></div>
-        <div class="form-group"><label for="confirmPassword">Confirm New Password</label><input class="form-control" id="confirmPassword" type="password" placeholder="Confirm New Password..."></div>
+
+    <section class="card settings-section" id="passwordSection">
+      <div class="section-header-collapsed" id="passwordCollapsed">
+        <div>
+          <h2>Password</h2><p>Change your account password.</p>
+        </div>
+        <button class="btn btn-beige" type="button" id="showPasswordBtn">Change Password</button>
+      </div>
+      <div class="password-content" id="passwordContent">
+        <h2>Change Password</h2><p>Enter your current password and a new one.</p>
+        <div class="password-grid">
+          <div class="form-group"><label for="currentPassword">Current password</label><input class="form-control" id="currentPassword" type="password" placeholder="Enter current password.."></div>
+          <div class="form-group"><label for="newPassword">New password</label><input class="form-control" id="newPassword" type="password" placeholder="Enter new password..."></div>
+          <div class="form-group"><label for="confirmPassword">Confirm New Password</label><input class="form-control" id="confirmPassword" type="password" placeholder="Confirm New Password..."></div>
+        </div>
+        <button class="btn btn-link" type="button" id="hidePasswordBtn">Cancel password change</button>
       </div>
     </section>
-    <div class="settings-actions"><button class="btn btn-yellow" type="button" id="cancelSettings">Cancel</button><button class="btn btn-primary" type="submit">Update</button></div>
+
+
   </form>
 </main></div>
 <script src="../assets/js/config.js"></script><script src="../assets/js/icons.js"></script><script src="../assets/js/api.js"></script><script src="../assets/js/common.js"></script><script src="../assets/js/validation.js"></script><script>SB.protect()</script><script src="../assets/js/layout.js"></script><script src="../assets/js/pages/settings.js"></script>

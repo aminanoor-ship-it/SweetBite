@@ -1,5 +1,7 @@
 const { body } = require('express-validator');
 
+const emailNormalizer = { gmail_remove_dots: false };
+
 const updateUserRules = [
   body('fullName')
     .trim()
@@ -15,7 +17,7 @@ const updateUserRules = [
     .trim()
     .isEmail()
     .withMessage('Enter a valid email address.')
-    .normalizeEmail(),
+    .normalizeEmail(emailNormalizer),
   body('role')
     .isIn(['Admin', 'Staff'])
     .withMessage('Role must be either Admin or Staff.'),
