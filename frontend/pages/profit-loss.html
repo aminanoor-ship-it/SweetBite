@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Profit & Loss | SweetBite</title>
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body data-page="profit-loss">
+  <div id="sidebar"></div>
+  <div class="app-shell">
+    <div id="topbar"></div>
+    <main class="page-content">
+      <div class="page-header"><h1 class="page-title">Profit & Loss</h1></div>
+
+      <section class="filter-bar pl-filter-bar">
+        <button class="pl-filter active" data-period="year">This Year</button>
+        <button class="pl-filter" data-period="month">This Month</button>
+        <button class="pl-filter" data-period="week">This Week</button>
+        <button class="pl-filter" data-period="today">Today</button>
+        <div class="pl-date-range">
+          <input type="date" class="form-control" id="dateFrom">
+          <span class="pl-date-sep">to</span>
+          <input type="date" class="form-control" id="dateTo">
+          <button class="btn btn-primary pl-apply-btn" id="applyDateRange">Apply</button>
+        </div>
+      </section>
+
+      <section class="pl-stats" id="plStats"></section>
+
+      <section class="pl-alerts" id="plAlerts"></section>
+
+      <div class="pl-charts-row">
+        <section class="card chart-card pl-chart-card">
+          <div class="card-head"><h2>Revenue vs Cost</h2></div>
+          <canvas id="revenueCostChart" aria-label="Revenue vs Cost chart"></canvas>
+        </section>
+        <section class="card chart-card pl-chart-card">
+          <div class="card-head"><h2>Monthly Profit / Loss Trend</h2></div>
+          <canvas id="profitLossChart" aria-label="Profit Loss trend chart"></canvas>
+        </section>
+      </div>
+
+      <section class="card pl-table-card">
+        <div class="card-head"><h2>Product Profit Breakdown</h2></div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Product Name</th><th>Sold Qty</th><th>Revenue</th><th>Cost</th><th>Profit</th><th>Loss</th><th>Margin %</th></tr></thead>
+            <tbody id="plTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/icons.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/common.js"></script>
+  <script>SB.protect()</script>
+  <script src="../assets/js/layout.js"></script>
+  <script src="../assets/js/pages/profit-loss.js"></script>
+</body>
+</html>

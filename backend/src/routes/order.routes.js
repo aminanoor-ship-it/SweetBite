@@ -1,0 +1,14 @@
+const router = require('express').Router();
+const controller = require('../controllers/order.controller');
+const asyncHandler = require('../utils/asyncHandler');
+const { protect } = require('../middleware/auth.middleware');
+const { allowRoles } = require('../middleware/role.middleware');
+const { validate } = require('../middleware/validate.middleware');
+const { createOrderRules, statusRules } = require('../validators/order.validator');
+router.use(protect);
+router.get('/', asyncHandler(controller.list));
+router.get('/:id', asyncHandler(controller.getOne));
+router.post('/', createOrderRules, validate, asyncHandler(controller.create));
+router.patch('/:id/status', statusRules, validate, asyncHandler(controller.updateStatus));
+router.delete('/:id', allowRoles('Admin'), asyncHandler(controller.remove));
+module.exports = router;

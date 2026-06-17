@@ -1,0 +1,12 @@
+const router = require('express').Router();
+const controller = require('../controllers/user.controller');
+const asyncHandler = require('../utils/asyncHandler');
+const { protect } = require('../middleware/auth.middleware');
+const { allowRoles } = require('../middleware/role.middleware');
+const { validate } = require('../middleware/validate.middleware');
+const { updateUserRules } = require('../validators/user.validator');
+router.use(protect, allowRoles('Admin'));
+router.get('/', asyncHandler(controller.list));
+router.put('/:id', updateUserRules, validate, asyncHandler(controller.update));
+router.delete('/:id', asyncHandler(controller.remove));
+module.exports = router;

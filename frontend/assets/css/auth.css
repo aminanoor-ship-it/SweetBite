@@ -1,0 +1,65 @@
+body.auth-page { min-height:100vh; overflow-x:hidden; background:#e6c28f; position:relative; }
+.auth-bg { position:fixed; inset:0; overflow:hidden; background:#e6c28f; }
+.auth-blob { position:absolute; background:#cfad7d; border-radius:38% 62% 45% 55% / 55% 45% 55% 45%; opacity:.9; }
+.auth-blob.one { width:760px; height:620px; left:-180px; top:-130px; transform:rotate(-13deg); }
+.auth-blob.two { width:670px; height:730px; right:-180px; top:-160px; transform:rotate(12deg); }
+.auth-blob.three { width:720px; height:610px; left:280px; bottom:-320px; transform:rotate(9deg); }
+.auth-blob.four { width:560px; height:630px; right:100px; bottom:-190px; transform:rotate(-12deg); }
+.auth-wrap { position:relative; z-index:2; min-height:100vh; display:grid; place-items:center; padding:20px 15px; }
+.auth-card { width:min(480px,100%); background:white; border-radius:16px; padding:50px 35px 40px; box-shadow:0 15px 35px rgba(75,53,27,.08); }
+.auth-card.register { padding-top:40px; }
+.auth-card h1 { text-align:center; font-size:28px; margin:0 0 10px; }
+.auth-card .intro { text-align:center; margin:0 0 30px; color:#555; font-size:15px; }
+.auth-form { display:grid; gap:20px; }
+.auth-form label { font-size:14px; }
+.auth-form .form-control { height:48px; background:#f2f4f8; border-color:#cfd4dc; border-radius:8px; padding-left:15px; font-size:15px; }
+.password-label { display:flex; justify-content:space-between; align-items:center; }
+.password-label a { color:#777; font-size:13px; }
+.password-field { position:relative; }
+.password-field .form-control { padding-right:48px; }
+.toggle-password { position:absolute; right:4px; top:50%; transform:translateY(-50%); width:40px; height:40px; border:none; background:transparent; cursor:pointer; display:grid; place-items:center; color:#888; padding:0; border-radius:6px; transition:color .2s,background .2s; }
+.toggle-password:hover { color:var(--navy); background:#eef0f4; }
+.eye-closed { display:none; }
+.toggle-password.active .eye-open { display:none; }
+.toggle-password.active .eye-closed { display:block; }
+.check-row { display:flex; align-items:center; gap:10px; color:#6f6f6f; font-size:14px; }
+.check-row input { width:20px; height:20px; accent-color:var(--beige); }
+.auth-submit { width:100%; margin:15px auto 0; height:48px; font-size:15px; }
+.auth-footer { text-align:center; color:#666; margin:15px 0 0; font-size:14px; }
+.auth-footer a { color:#4e82f7; text-decoration:underline; font-weight:600; }
+.auth-error { color:var(--red); text-align:center; min-height:20px; font-size:13px; }
+.auth-success { color:var(--green); text-align:center; min-height:20px; font-size:13px; }
+
+.profile-image-group { display:grid; gap:8px; }
+.profile-upload { width:100px; height:100px; border-radius:50%; background:#f2f4f8; border:2px dashed #cfd4dc; display:grid; place-items:center; cursor:pointer; overflow:hidden; position:relative; transition:border-color .2s; }
+.profile-upload:hover, .profile-upload:focus-visible { border-color:var(--beige); outline:none; }
+.profile-upload img { width:100%; height:100%; object-fit:cover; display:none; }
+.profile-upload img[src]:not([src=""]) { display:block; }
+.upload-overlay { display:grid; place-items:center; text-align:center; color:#888; font-size:11px; font-weight:600; gap:2px; }
+.upload-overlay svg { opacity:.6; }
+.profile-upload img[src]:not([src=""]) ~ .upload-overlay { display:none; }
+.upload-overlay { position:absolute; inset:0; background:rgba(255,255,255,.85); opacity:0; transition:opacity .2s; }
+.profile-upload:hover .upload-overlay { opacity:1; }
+
+@media(max-width:480px){
+ .auth-wrap { padding:15px 12px; }
+ .auth-card { width:100%; padding:40px 20px 32px; border-radius:14px; }
+ .auth-card.register { padding-top:32px; }
+ .auth-card h1 { font-size:24px; margin:0 0 8px; }
+ .auth-card .intro { margin:0 0 24px; font-size:14px; }
+ .auth-form { gap:16px; }
+ .auth-form label { font-size:13px; }
+ .auth-form .form-control { height:44px; font-size:14px; }
+ .password-label a { font-size:12px; }
+ .check-row { font-size:13px; }
+ .check-row input { width:18px; height:18px; }
+ .auth-submit { height:44px; font-size:14px; margin:12px auto 0; }
+ .auth-footer { font-size:13px; margin:12px 0 0; }
+}
+
+@media(max-width:360px){
+ .auth-card { padding:35px 16px 28px; }
+ .auth-card h1 { font-size:22px; }
+ .auth-form .form-control { height:40px; font-size:13px; }
+ .auth-submit { height:40px; font-size:13px; }
+}
