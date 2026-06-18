@@ -6,7 +6,13 @@ const UserModel = require('../src/models/user.model');
 async function run() {
   const fullName = process.env.ADMIN_NAME || 'SweetBite Admin';
   const username = process.env.ADMIN_USERNAME || 'admin';
-  const email = process.env.ADMIN_EMAIL || 'admin@sweetbite.com';
+  const email = process.env.ADMIN_EMAIL;
+  
+  if (!email) {
+    console.error('ADMIN_EMAIL must be set in .env file.');
+    process.exitCode = 1;
+    return;
+  }
   const password = process.env.ADMIN_PASSWORD;
 
   if (!password || password.length < 8) {
