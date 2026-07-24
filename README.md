@@ -270,3 +270,7 @@ Before deployment:
 7. Create scheduled MySQL backups.
 8. Change the initial admin password.
 9. Test role permissions, stock changes, validation and error responses.
+
+
+Figma design 
+https://www.figma.com/design/cP1d3WkNmUenEy7qeTLunE/SweetBite1?node-id=0-1&p=f&t=NSmjWOwwdHmVFCQr-0
