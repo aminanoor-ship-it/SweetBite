@@ -1,3 +1,6 @@
+<img width="1896" height="822" alt="image" src="https://github.com/user-attachments/assets/68c96b75-1c54-4788-a7d9-fd77c579472f" />
+
+
 # SweetBite Full System
 
 This main folder contains the complete project structure:
